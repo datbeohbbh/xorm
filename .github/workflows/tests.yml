@@ -12,7 +12,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix:
-        go-version: [1.16.x, 1.17.x, 1.19.x, 1.20.x]
+        go-version: [1.17.x, 1.18.x, 1.19.x, 1.20.x]
         os: [ubuntu-latest]
     env:
       OS: ${{ matrix.os }}
@@ -34,7 +34,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix:
-        go-version: [1.16.x, 1.17.x, 1.19.x, 1.20.x]
+        go-version: [1.17.x, 1.18.x, 1.19.x, 1.20.x]
         os: [ubuntu-latest]
     services:
       pgsql:
@@ -71,7 +71,7 @@ jobs:
       cancel-in-progress: true
     strategy:
       matrix:
-        go-version: [1.16.x, 1.17.x, 1.19.x, 1.20.x]
+        go-version: [1.17.x, 1.18.x, 1.19.x, 1.20.x]
         os: [ubuntu-latest]
     services:
       ydb:
@@ -106,15 +106,14 @@ jobs:
       - name: ydb integration test
         run: |
           [ -d "./integrations/ydbtest" ] && \
-          make test-ydb || \
-          echo "integration tests for ydb do not exist"
+          make test-ydb
   test-ydb-insecure-connection:
     concurrency:
       group: test-ydb-insecure-connection-${{ github.ref }}-${{ matrix.os }}-${{ matrix.go-version }}
       cancel-in-progress: true
     strategy:
       matrix:
-        go-version: [1.16.x, 1.17.x, 1.19.x, 1.20.x]
+        go-version: [1.17.x, 1.18.x, 1.19.x, 1.20.x]
         os: [ubuntu-latest]
     services:
       ydb:
@@ -148,5 +147,4 @@ jobs:
       - name: ydb test insecure connection
         run: |
           [ -d "./integrations/ydbtest" ] && \
-          make test-ydb || \
-          echo "integration tests for ydb do not exist"
+          make test-ydb
